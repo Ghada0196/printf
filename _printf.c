@@ -41,5 +41,5 @@ int _printf(const char *format, ...)
 
 	/* returning length of format */
 
-	return (len);
+	return (len - 1);
 }
