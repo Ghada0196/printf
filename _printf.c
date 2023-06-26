@@ -29,6 +29,10 @@ int _printf(const char *format, ...)
 				handle_c(op);
 			if (format[i + 1] == 's')
 				handle_s(op);
+			if (format[i + 1] == 'd')
+				handle_d(op);
+			if (format[i + 1] == 'i')
+				handle_d(op);
 			if (format[i + 1] == '%')
 				i--;
 			i = i + 2;
