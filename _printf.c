@@ -25,6 +25,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			/** got to use a struct with character and function as parameters instead */
 			if (format[i + 1] == 'c')
 				handle_c(op);
 			if (format[i + 1] == 's')
