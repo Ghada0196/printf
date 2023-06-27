@@ -19,13 +19,15 @@ void write_char(char c)
  * Return: nothing
  */
 
-void handle_c(va_list arg)
+int handle_c(va_list arg)
 {
 	char c;
 
 	c = va_arg (arg, int);
 
 	write_char(c);
+
+	return (-1);
 }
 
 /**
@@ -35,7 +37,7 @@ void handle_c(va_list arg)
  * Return: nothing
  */
 
-void handle_s(va_list arg)
+int handle_s(va_list arg)
 {
 	char *s;
 	int i = 0;
@@ -47,6 +49,8 @@ void handle_s(va_list arg)
 		write_char(s[i]);
 		i++;
 	}
+
+	return (i);
 }
 
 /**
@@ -56,10 +60,11 @@ void handle_s(va_list arg)
  * Return: nothing
  */
 
-void print_number(int n)
+int print_number(int n, int len)
 {
 	int num = n;
 
+	len++;
 	if (num < 0)
 	{
 		write_char('-');
@@ -67,9 +72,12 @@ void print_number(int n)
 	}
 
 	if ((num / 10) > 0)
-		print_number(num / 10);
+	{
+		print_number(num / 10, len);
+	}
 
 	write_char(num % 10 + '0');
+	return (len);
 }
 
 /**
@@ -79,12 +87,14 @@ void print_number(int n)
  * Return: nothing
  */
 
-void handle_d(va_list arg)
+int handle_d(va_list arg)
 {
 	int num;
+	int len = 0;
 
 	num = va_arg(arg, int);
 	
-	print_number(num);
-}
+	print_number(num, len);
 
+	return (len);
+}

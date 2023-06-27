@@ -11,12 +11,13 @@
 int _printf(const char *format, ...)
 {
 	int len = 0;
-	int i;
+	int i, final_len;
 	va_list op;
 
 	while (format[len])
 		len++;
 
+	final_len = len;
 	/* the printing part */
 
 	va_start (op, format);
@@ -26,17 +27,26 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			/** got to use a struct with character and function as parameters instead */
-			if (format[i + 1] == 'c')
-				handle_c(op);
-			if (format[i + 1] == 's')
-				handle_s(op);
-			if (format[i + 1] == 'd')
-				handle_d(op);
-			if (format[i + 1] == 'i')
-				handle_d(op);
-			if (format[i + 1] == '%')
-				i--;
-			i = i + 2;
+			switch(format[i + 1]) {
+					case 'c':
+					final_len += handle_c(op);
+					break;
+					case 's':
+					final_len += handle_s(op);
+					break;
+					case 'd':
+					final_len += handle_d(op);
+					break;
+					case 'i':
+					final_len += handle_d(op);
+					break;
+					case '%':
+					write_char('%');
+					final_len--;
+					break;
+					};
+
+					i = i +2;
 		}
 
 		write (1, &format[i], 1);
@@ -46,5 +56,5 @@ int _printf(const char *format, ...)
 
 	/* returning length of format */
 
-	return (len - 1);
+	return (final_len);
 }
