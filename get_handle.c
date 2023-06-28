@@ -16,10 +16,11 @@ int get_handle(char c, va_list arg)
 		{'c', handle_c},
 		{'s', handle_s},
 		{'d', handle_d},
-		{'i', handle_d}
+		{'i', handle_d},
+		{'%', handle_percent}
 	};
 
-	for (i = 0; i < 4; i++)
+	for (i = 0; i < 5; i++)
 	{
 		if (c == handles[i].c)
 			len = (handles[i].f)(arg);

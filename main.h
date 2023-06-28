@@ -24,6 +24,7 @@ void print_number(int n);
 int handle_c(va_list arg);
 int handle_s(va_list arg);
 int handle_d(va_list arg);
+int handle_percent(va_list arg __attribute__((unused)));
 int get_handle(char c, va_list arg);
 
 #endif

@@ -14,6 +14,9 @@ int _printf(const char *format, ...)
 	int i, final_len, j;
 	va_list op;
 
+	if (format == NULL)
+		return (-1);
+
 	while (format[len])
 		len++;
 
@@ -31,12 +34,6 @@ int _printf(const char *format, ...)
 			if (j != 0)
 			{
 				final_len += j;
-				i = i + 2;
-			}
-			if (format[i + 1] == '%')
-			{
-				write_char('%');
-				final_len--;
 				i = i + 2;
 			}
 		}
