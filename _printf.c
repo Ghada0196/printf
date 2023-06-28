@@ -20,13 +20,14 @@ int _printf(const char *format, ...)
 	while (format[len])
 		len++;
 
-	final_len = len;
+	final_len = 0;
 	/* the printing part */
 
 	va_start (op, format);
 
 	for (i = 0; i < len; i++)
 	{
+		final_len++;
 		if (format[i] == '%')
 		{
 			/** got to use a struct with character and function as parameters instead */

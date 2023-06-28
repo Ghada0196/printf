@@ -11,5 +11,5 @@ int handle_percent(va_list content __attribute__((unused)))
 {
 	write_char('%');
 	
-	return (-1);
+	return (1);
 }

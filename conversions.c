@@ -27,7 +27,7 @@ int handle_c(va_list arg)
 
 	write_char(c);
 
-	return (-1);
+	return (1);
 }
 
 /**
