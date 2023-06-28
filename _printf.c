@@ -11,7 +11,7 @@
 int _printf(const char *format, ...)
 {
 	int len = 0;
-	int i, final_len;
+	int i, final_len, j;
 	va_list op;
 
 	while (format[len])
@@ -27,29 +27,21 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			/** got to use a struct with character and function as parameters instead */
-			switch(format[i + 1]) {
-					case 'c':
-					final_len += handle_c(op);
-					break;
-					case 's':
-					final_len += handle_s(op);
-					break;
-					case 'd':
-					final_len += handle_d(op);
-					break;
-					case 'i':
-					final_len += handle_d(op);
-					break;
-					case '%':
-					write_char('%');
-					final_len--;
-					break;
-					};
-
-					i = i +2;
+			j = get_handle(format[i + 1], op);
+			if (j != 0)
+			{
+				final_len += j;
+				i = i + 2;
+			}
+			if (format[i + 1] == '%')
+			{
+				write_char('%');
+				final_len--;
+				i = i + 2;
+			}
 		}
 
-		write (1, &format[i], 1);
+		write_char(format[i]);
 	}
 
 	va_end (op);

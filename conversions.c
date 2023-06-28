@@ -60,24 +60,16 @@ int handle_s(va_list arg)
  * Return: nothing
  */
 
-int print_number(int n, int len)
+void print_number(int n)
 {
 	int num = n;
 
-	len++;
-	if (num < 0)
-	{
-		write_char('-');
-		num = -num;
-	}
-
 	if ((num / 10) > 0)
 	{
-		print_number(num / 10, len);
+		print_number(num / 10);
 	}
 
 	write_char(num % 10 + '0');
-	return (len);
 }
 
 /**
@@ -94,7 +86,20 @@ int handle_d(va_list arg)
 
 	num = va_arg(arg, int);
 	
-	print_number(num, len);
+	if (num < 0)
+	{
+		write_char('-');
+		num = -num;
+		len++;
+	}
 
-	return (len);
+	print_number(num);
+
+	while (num / 10 > 0)
+	{
+		len++;
+		num = num / 10;
+	}
+
+	return (len + 1);
 }

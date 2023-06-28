@@ -12,11 +12,18 @@
  * @f: function
  */
 
+typedef struct handle
+{
+	char c;
+	int (*f)(va_list);
+} handle_t;
+
 int _printf(const char *format, ...);
 void write_char(char c);
-int print_number(int n, int len);
+void print_number(int n);
 int handle_c(va_list arg);
 int handle_s(va_list arg);
 int handle_d(va_list arg);
+int get_handle(char c, va_list arg);
 
 #endif
